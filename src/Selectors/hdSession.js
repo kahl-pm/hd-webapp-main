@@ -1,4 +1,4 @@
-import { has } from 'cypress/types/lodash';
+import { has } from 'lodash';
 import { PM_PRODUCT_PREFIX, UNDERWRITING_METHODS, USER_TYPES, FAMILY_ROLE, USER_PLAN_AGE_ELIBIGILITY } from '../utils/const';
 import { getBirthdateParts, getUserQuoteIdentifier, isEmpty, calcAge } from '../utils/helpers';
 import { getDependent, getDependentKeys } from './dependents';

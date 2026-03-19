@@ -62,6 +62,13 @@ export default defineConfig(({ mode }) => ({
     extensions: ['.mjs', '.js', '.ts', '.tsx', '.jsx', '.json'],
   },
 
+  // Treat .js files as JSX since the codebase uses JSX in .js files throughout
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.js$/,
+    exclude: [],
+  },
+
   server: {
     port: 3000,
     proxy: {
@@ -92,5 +99,10 @@ export default defineConfig(({ mode }) => ({
   // Ensure Vite doesn't try to optimize CJS deps that cause issues
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-redux', 'redux', 'connected-react-router'],
+    esbuildOptions: {
+      loader: {
+        '.js': 'jsx',
+      },
+    },
   },
 }));
