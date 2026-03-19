@@ -10,6 +10,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
   },
   "include": ["src/**/*", "server/**/*", "src/types/custom.d.ts", "node_modules/@policyme/global-libjs-designsystem/themes/mui.d.ts"],
 }

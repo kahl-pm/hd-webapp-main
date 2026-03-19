@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { styled } from '@mui/material';
-import universal from 'react-universal-component';
-import { getLoadingConfig } from '../Routing/utils';
 
 
-const RebrandNav = universal(
-  () => import(/* webpackChunkName: "other" */ '../RebrandNav'),
-  getLoadingConfig('other'),
+const RebrandNav = React.lazy(
+  () => import('../RebrandNav'),
 );
 
 interface PageContentProps {
@@ -31,7 +28,9 @@ const PageContentContainer = styled('div')(({ theme }) => {
 const PageContentWithNav:React.FC<PageContentProps> = ({ children }) => {
   return (
     <>
-      <RebrandNav />
+      <Suspense fallback={null}>
+        <RebrandNav />
+      </Suspense>
       {
         /* Since the new nav is vertical,
         we have to account for the vertical space(width) it takes

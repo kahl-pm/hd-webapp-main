@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, useLocation } from 'react-router-dom';
-import universal from 'react-universal-component';
 import { CSSTransition } from 'react-transition-group';
 import { Global, css } from '@emotion/react';
 import { useCustomPages, Customisable } from '../Customisation';
@@ -9,79 +8,59 @@ import { useCustomPages, Customisable } from '../Customisation';
 import Container from '../Container';
 
 import { ROUTES, ROUTE_REGEX, ROUTE_SECTIONS } from '../../utils/const';
-import { getLoadingConfig, checkIfMigratedPage } from './utils';
+import { checkIfMigratedPage } from './utils';
 import WithGoogleMaps from '../HOC/WithGoogleMaps';
+import LoadingComponent from '../LoadingOverlay';
 
-export const CellPhone = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/CellPhone'),
-  getLoadingConfig('split-application'),
-);
-
-const EmploymentIncomeAnnual = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/EmploymentIncomeAnnual'),
-  getLoadingConfig('split-application'),
+export const CellPhone = React.lazy(
+  () => import('../../pages/application/CellPhone'),
 );
 
-const BasicDetails = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/BasicDetails'),
-  getLoadingConfig('split-application'),
-);
-const FullAddress = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/FullAddress'),
-  getLoadingConfig('split-application'),
+const EmploymentIncomeAnnual = React.lazy(
+  () => import('../../pages/application/EmploymentIncomeAnnual'),
 );
 
-const PendingPolicies = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/PendingPolicies'),
-  getLoadingConfig('split-application'),
+const BasicDetails = React.lazy(
+  () => import('../../pages/application/BasicDetails'),
 );
-const Referrer = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/Referrer'),
-  getLoadingConfig('split-application'),
-);
-const Interest = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/Interest'),
-  getLoadingConfig('split-application'),
-);
-const BirthLocation = universal(
-  () => import(
-    /* webpackChunkName: "split-application" */ '../../pages/application/BirthLocation'
-  ),
-  getLoadingConfig('split-application'),
-);
-// const PartnerEmail = universal(
-//   () => import(/* webpackChunkName: "split-application" */
-//  '../../pages/application/PartnerEmail'),
-//   getLoadingConfig('split-application'),
-// );
-const PartnerInfo = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/PartnerInfo'),
-  getLoadingConfig('split-application'),
-);
-const PartnerSameAddress = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/PartnerSameAddress'),
-  getLoadingConfig('split-application'),
+const FullAddress = React.lazy(
+  () => import('../../pages/application/FullAddress'),
 );
 
-const PrimaryTransition = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/PrimaryTransition'),
-  getLoadingConfig('split-application'),
+const PendingPolicies = React.lazy(
+  () => import('../../pages/application/PendingPolicies'),
+);
+const Referrer = React.lazy(
+  () => import('../../pages/application/Referrer'),
+);
+const Interest = React.lazy(
+  () => import('../../pages/Interest'),
+);
+const BirthLocation = React.lazy(
+  () => import('../../pages/application/BirthLocation'),
+);
+const PartnerInfo = React.lazy(
+  () => import('../../pages/application/PartnerInfo'),
+);
+const PartnerSameAddress = React.lazy(
+  () => import('../../pages/application/PartnerSameAddress'),
 );
 
-const Authorization = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/application/Authorization'),
-  getLoadingConfig('split-application'),
+const PrimaryTransition = React.lazy(
+  () => import('../../pages/application/PrimaryTransition'),
 );
 
-const DisclosureIntegration = universal(
-  () => import(/* webpackChunkName: "split-application" */ '../../pages/DisclosureIntegration'),
-  getLoadingConfig('split-application'),
+const Authorization = React.lazy(
+  () => import('../../pages/application/Authorization'),
+);
+
+const DisclosureIntegration = React.lazy(
+  () => import('../../pages/DisclosureIntegration'),
 );
 
 // other pages
-const NotFound = universal(
-  () => import(/* webpackChunkName: "other" */ '../../pages/not-found'),
-  getLoadingConfig('other'),
+const NotFound = React.lazy(
+  () => import('../../pages/not-found'),
 );
 
 // future ab-tests involving a/b versions of pages should use routesA and routesB
@@ -136,6 +115,7 @@ const ApplicationComponent = (props) => {
   const isNewDesignSystemMigratedPage = checkIfMigratedPage(currentLocation);
 
   return <>
+    <Suspense fallback={<LoadingComponent />}>
     <Container className="application" hasFixedBanner isNewDesignSystemMigratedPage={isNewDesignSystemMigratedPage}>
       {hasRoute ? <>
         { allRoutes.map(r => <Route
@@ -280,6 +260,7 @@ padding: ${(r.route === ROUTES.APPLICATION_CONSENT || r.route === ROUTES.APPLICA
           </CSSTransition>)}
         </Route>) } </> : <Route path="*" component={NotFound} />}
     </Container>
+    </Suspense>
   </>;
 };
 

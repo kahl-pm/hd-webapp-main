@@ -1,6 +1,4 @@
 const { defineConfig } = require('cypress');
-// const { cypressConfig } = require('@axe-core/watcher');
-const webpackConfig = require('./cypress/webpack.config');
 
 module.exports = defineConfig({
   projectId: 'mnrh5j',
@@ -31,8 +29,7 @@ module.exports = defineConfig({
   component: {
     devServer: {
       framework: 'react',
-      bundler: 'webpack',
-      webpackConfig,
+      bundler: 'vite',
     },
     setupNodeEvents(on, config) {
       return require('./cypress/plugins/index.js')(on, config);

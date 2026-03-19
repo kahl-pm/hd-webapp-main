@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
-import { StaticRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import thunkMiddleware from 'redux-thunk';
 import { flagsmithInit, rollABTestBand } from '@policyme/global-libjs-utils';
@@ -18,11 +17,7 @@ import { getABTestBandCookie } from '../utils/helpers';
 let _history;
 
 export function createNewStore(_initialState) { // creates an initialized react store
-  if (!process.env.BROWSER) { // server rendering, use static router
-    const staticRouter = new StaticRouter();
-    staticRouter.props = { location: '/', context: {}, basename: process.env.GLOBAL_ROUTE };
-    _history = staticRouter.render().props.history;
-  } else if ((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'cypressserver') && typeof window !== 'undefined') { // support hot module reloading in dev by saving history
+  if ((process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'cypressserver') && typeof window !== 'undefined') { // support hot module reloading in dev by saving history
     _history = window.__history__ || createBrowserHistory({ basename: process.env.GLOBAL_ROUTE });
     window.__history__ = _history;
   } else { // prod - create a new history object, do not save to window for reuse
@@ -119,9 +114,7 @@ export function createNewStore(_initialState) { // creates an initialized react 
  *    is by design as feature flag management should prioritize
  *    availability over consistency.
  */
-if (process.env.BROWSER) {
-  flagsmithInit({});
-}
+flagsmithInit({});
 const exportedStore = createNewStore();
 
 export default exportedStore;
