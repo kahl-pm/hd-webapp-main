@@ -1,0 +1,47 @@
+out
+node_modules
+npm-debug.log
+build
+buildServer
+coverage
+.DS_STore
+.vscode
+.idea/*
+.env*
+!.env.example
+.cache-loader
+
+cert.pem
+key.pem
+
+# Debug json file
+**/data-templates
+
+# compiled css files
+src/**/*.css
+src/**/**/*.css
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+# cypress screenshots
+cypress/screenshots
+
+# storybook build files
+storybook-static/*
+out*
+licenses.csv
+
+# yalc
+.yalc
+yalc.lock
+
+#axe a11y reports
+axe-reports/*
+
+docker-services/.empty/
+docker-services/.empty/*
+# Local formatting prettier config
+.prettierrc

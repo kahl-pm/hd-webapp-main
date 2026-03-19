@@ -1,0 +1,128 @@
+version: 2.1
+orbs:
+  itt: policyme/itt_v8@dev:master
+
+parameters:
+  run-itt:
+    default: false
+    type: boolean
+  run-itt-all-test-cases:
+    default: false
+    type: boolean
+  run-itt-selected-test-cases:
+    default: false
+    type: boolean
+  run-policyme:
+    default: true
+    type: boolean
+  run-itt-for-tenant:
+    default: ""
+    type: string
+  run-itt-ondemand:
+    default: true
+    type: boolean
+  is_nightly_run:
+    default: false
+    type: boolean
+  skip-itt-precheck:
+    default: false
+    type: boolean
+  slack-initiator:
+    default: ""
+    type: string
+
+workflows:
+  itt:
+    jobs:
+      - itt/precheck:
+          context:
+            - PM_GITHUB_CONTEXT
+            - PM_SLACK_CONTEXT
+            - PM_PYPI_CONTEXT
+          skip_precheck: << pipeline.parameters.skip-itt-precheck >>
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+      - itt/db_dump:
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+          requires:
+            - itt/precheck
+      - itt/cypress:
+          test_case_number: 37
+          name: 37-test-case
+          # Hardcoded tenant for now as H&D is only for CAA tenant
+          # Later planning to group test cases by tenant
+          # Issue: https://policyme.atlassian.net/browse/INFR-2857
+          run_itt_for_tenant: "caa"
+          requires:
+            - itt/db_dump
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_PYPI_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+      - itt/validation-testcases:
+          test_case_number: 37
+          repository_name: "hd-restapi-main"
+          branch_name: "$CIRCLE_BRANCH"
+          name: 37-hd-restapi-main-validation-test-case
+          # Hardcoded tenant for now as H&D is only for CAA tenant
+          # Later planning to group test cases by tenant
+          # Issue: https://policyme.atlassian.net/browse/INFR-2857
+          run_itt_for_tenant: "caa"
+          requires:
+            - 37-test-case
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_PYPI_CONTEXT
+      - itt/validation-testcases:
+          test_case_number: 37
+          repository_name: "hd-restapi-quotes"
+          branch_name: "$CIRCLE_BRANCH"
+          name: 37-hd-restapi-quotes-validation-test-case
+          # Hardcoded tenant for now as H&D is only for CAA tenant
+          # Later planning to group test cases by tenant
+          # Issue: https://policyme.atlassian.net/browse/INFR-2857
+          run_itt_for_tenant: "caa"
+          requires:
+            - 37-test-case
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_PYPI_CONTEXT
+      - itt/cypress:
+          test_case_number: 51
+          name: 51-test-case
+          run_itt_for_tenant: "bmoi"
+          requires:
+            - itt/db_dump
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_PYPI_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+      - itt/waiter:
+          name: wait-for-test-cases
+          waiter_job_name: "wait-for-test-cases"
+          context:
+            - PM_CIRCLECI_CONTEXT
+      - itt/send-slack-message:
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          is_nightly_run: << pipeline.parameters.is_nightly_run >>
+          slack_initiator: << pipeline.parameters.slack-initiator >>
+          requires:
+            - wait-for-test-cases
+            - itt/precheck
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_SLACK_CONTEXT
+            - PM_GOOGLE_CONTEXT

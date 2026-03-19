@@ -1,0 +1,84 @@
+version: 2.1
+orbs:
+  itt: policyme/itt_v8@dev:master
+
+parameters:
+  run-itt:
+    default: false
+    type: boolean
+  run-itt-all-test-cases:
+    default: false
+    type: boolean
+  run-itt-selected-test-cases:
+    default: false
+    type: boolean
+  run-policyme:
+    default: true
+    type: boolean
+  run-itt-for-tenant:
+    default: ""
+    type: string
+  run-itt-ondemand:
+    default: true
+    type: boolean
+  run-itt-test-case-number:
+    default: -1
+    type: integer
+  is_nightly_run:
+    default: false
+    type: boolean
+  slack-initiator:
+    default: ""
+    type: string
+
+workflows:
+  itt-single-testcase-with-validation:
+    jobs:
+      - itt/db_dump:
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+      - itt/cypress:
+          name: << pipeline.parameters.run-itt-test-case-number >>-test-case
+          test_case_number: << pipeline.parameters.run-itt-test-case-number >>
+          is_nightly_test: << pipeline.parameters.is_nightly_run >>
+          run_itt_for_tenant: << pipeline.parameters.run-itt-for-tenant >>
+          requires:
+            - itt/db_dump
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_PYPI_CONTEXT
+            - PM_NPM_READ_CONTEXT
+      - itt/validation-testcases:
+          name: << pipeline.parameters.run-itt-test-case-number >>-life-restapi-main-validation-test-case
+          test_case_number: << pipeline.parameters.run-itt-test-case-number >>
+          run_itt_for_tenant: << pipeline.parameters.run-itt-for-tenant >>
+          repository_name: "life-restapi-main"
+          branch_name: "$CIRCLE_BRANCH"
+          requires:
+            - << pipeline.parameters.run-itt-test-case-number >>-test-case
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_PYPI_CONTEXT
+      - itt/waiter:
+          name: wait-for-test-cases
+          waiter_job_name: "wait-for-test-cases"
+          context:
+            - PM_CIRCLECI_CONTEXT
+      - itt/send-slack-message:
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          is_nightly_run: << pipeline.parameters.is_nightly_run >>
+          slack_initiator: << pipeline.parameters.slack-initiator >>
+          requires:
+            - wait-for-test-cases
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_SLACK_CONTEXT
+            - PM_GOOGLE_CONTEXT

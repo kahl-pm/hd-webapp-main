@@ -1,0 +1,144 @@
+{
+    "data": {
+      "joint": [
+        {
+          "company": "ML", 
+          "id": 1, 
+          "invalid": false, 
+          "is_express": true, 
+          "is_slow": false, 
+          "mn_prems": 16.45, 
+          "product_enum": 0, 
+          "term": 0, 
+          "yr_prems": 182.77
+        }, 
+        {
+          "company": "WW", 
+          "id": 2, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 17.64, 
+          "product_enum": 0, 
+          "term": 0, 
+          "yr_prems": 196.0
+        }, 
+        {
+          "company": "BMO", 
+          "id": 3, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": true, 
+          "mn_prems": 23.94, 
+          "product_enum": 0, 
+          "term": 0, 
+          "yr_prems": 266.0
+        }, 
+        {
+          "company": "CPP", 
+          "id": 4, 
+          "invalid": true, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 0.0, 
+          "product_enum": 0, 
+          "term": 0, 
+          "yr_prems": 0.0
+        }
+      ], 
+      "primary": [
+        {
+          "company": "ML", 
+          "id": 1, 
+          "invalid": false, 
+          "is_express": true, 
+          "is_slow": false, 
+          "mn_prems": 11.38, 
+          "product_enum": 8, 
+          "term": 20, 
+          "yr_prems": 127.0
+        }, 
+        {
+          "company": "WW", 
+          "id": 2, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 9.36, 
+          "product_enum": 18, 
+          "term": 20, 
+          "yr_prems": 104.0
+        }, 
+        {
+          "company": "BMO", 
+          "id": 3, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": true, 
+          "mn_prems": 12.51, 
+          "product_enum": 2, 
+          "term": 20, 
+          "yr_prems": 139.0
+        }, 
+        {
+          "company": "CPP", 
+          "id": 4, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 19.71, 
+          "product_enum": 11, 
+          "term": 20, 
+          "yr_prems": 219.0
+        }
+      ], 
+      "secondary": [
+        {
+          "company": "ML", 
+          "id": 1, 
+          "invalid": false, 
+          "is_express": true, 
+          "is_slow": false, 
+          "mn_prems": 10.52, 
+          "product_enum": 8, 
+          "term": 20, 
+          "yr_prems": 117.42
+        }, 
+        {
+          "company": "WW", 
+          "id": 2, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 8.28, 
+          "product_enum": 18, 
+          "term": 20, 
+          "yr_prems": 92.0
+        }, 
+        {
+          "company": "BMO", 
+          "id": 3, 
+          "invalid": false, 
+          "is_express": false, 
+          "is_slow": true, 
+          "mn_prems": 11.43, 
+          "product_enum": 2, 
+          "term": 20, 
+          "yr_prems": 127.0
+        }, 
+        {
+          "company": "CPP", 
+          "id": 4, 
+          "invalid": true, 
+          "is_express": false, 
+          "is_slow": false, 
+          "mn_prems": 0.0, 
+          "product_enum": 0, 
+          "term": 0, 
+          "yr_prems": 0.0
+        }
+      ], 
+      "seq_num": 2
+    }
+  }
+  

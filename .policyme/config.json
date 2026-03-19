@@ -1,0 +1,7 @@
+{
+  "ondemand": {
+      "required_repository_environments": [
+          "global-webapp-main"
+      ]
+  }
+}

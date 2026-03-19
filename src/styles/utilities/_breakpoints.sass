@@ -1,0 +1,42 @@
+$sm-breakpoint: "576px";
+$md-breakpoint: "768px";
+$lg-breakpoint: "992px";
+$xl-breakpoint: "1200px";
+  
+$sm-up: "(min-width: #{$sm-breakpoint})";
+$md-up: "(min-width: #{$md-breakpoint})";
+$lg-up: "(min-width: #{$lg-breakpoint})";
+$xl-up: "(min-width: #{$xl-breakpoint})";
+
+//old
+=medium-phone
+  @media screen and (min-width: 23.4375rem)
+    @content
+
+=large-phone
+  @media screen and (min-width: 25.875rem)
+    @content
+
+=mobile
+  @media screen and (max-width: 47.9375rem)
+    @content
+
+=touch
+  @media screen and (max-width: 62rem)
+    @content
+
+=tablet
+  @media screen and (min-width: 48rem)
+    @content
+
+=desktop
+  @media screen and (min-width: 62rem)
+    @content
+
+=widescreen
+  @media screen and (min-width: 80rem)
+    @content
+
+=fullhd
+  @media (min-width: 90rem)
+    @content

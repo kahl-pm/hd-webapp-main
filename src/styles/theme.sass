@@ -1,0 +1,71 @@
+
+@import 'utilities/variables'
+@import 'utilities/breakpoints'
+
+$brand-grey-light: #eaeaea
+$brand-primary-light: #69d0ff
+
+
+.lato-family
+  font-family: 'Lato', sans-serif !important
+
+.app-texts
+  color: $brand-secondary
+  line-height: 1.375rem
+  font-size: 1rem
+  &.normal-text
+    font-weight: 400 !important
+  &.semi-bold
+    font-weight: 600 !important
+  &.bold
+    font-weight: bold !important
+  &.invert
+    color: white
+  &.no-line-height
+    line-height: 1.375rem
+  &.sub-text
+    font-size: 0.875rem
+    font-weight: 600
+    line-height: 1.57rem
+    &.no-line-height
+      line-height: 0.875rem
+  &.headings
+    font-weight: 600
+    font-size: 1.375rem
+    &.no-line-height
+      line-height: 1.375rem
+  &.sub-headings
+    font-weight: 600
+    font-size: 1.125rem
+    &.no-line-height
+      line-height: 1.375rem
+  &.x-large
+    font-size: 1.375rem
+    line-height: 2.5rem
+    font-weight: 700
+    +tablet
+      font-size: 1.625rem
+
+input:not(.new-design-system),
+textarea:not(.new-design-system)
+  outline: none
+  border: none
+  text-align: center
+  line-height: 3rem
+  width: 100%
+  border-bottom: 0.125rem solid #1bb0db
+  color: $brand-secondary
+  font-size: 1.125rem
+
+input[type="radio"]:not(.new-design-system),
+input[type="checkbox"]:not(.new-design-system)
+  width: auto
+
+input:not(.new-design-system)
+  max-width: 10rem
+
+textarea:not(.new-design-system)
+  line-height: 1.5rem
+
+p:not(.new-design-system)
+  max-width: 100%

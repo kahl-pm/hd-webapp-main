@@ -1,0 +1,65 @@
+version: 2.1
+orbs:
+  webapp: policyme/webappn20@dev:master
+
+parameters:
+  run-policyme:
+    default: true
+    type: boolean
+  run-journey-tests:
+    default: false
+    type: boolean
+
+workflows:
+  journey-tests:
+    jobs:
+      - webapp/prepare-release-branch:
+          filters:
+            branches:
+              only:
+                - /release\/.*/
+          context:
+            - PM_PYPI_CONTEXT
+            - PM_GITHUB_CONTEXT
+
+      - webapp/journey-tests:
+          name: journey-tests-pm-bucket-a
+          tenant_code: "pm"
+          cypress_config: "partiale2e"
+          bucket_identifier: "a"
+          total_buckets: 2
+          requires:
+            - webapp/prepare-release-branch
+          filters:
+            branches:
+              only:
+                - /release\/.*/
+          context:
+            - PM_PYPI_CONTEXT
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+            - PM_JIRA_CONTEXT
+            - PM_SLACK_CONTEXT
+
+      - webapp/journey-tests:
+          name: journey-tests-pm-bucket-b
+          tenant_code: "pm"
+          cypress_config: "partiale2e"
+          bucket_identifier: "b"
+          total_buckets: 2
+          requires:
+            - webapp/prepare-release-branch
+          filters:
+            branches:
+              only:
+                - /release\/.*/
+          context:
+            - PM_PYPI_CONTEXT
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+            - PM_JIRA_CONTEXT
+            - PM_SLACK_CONTEXT

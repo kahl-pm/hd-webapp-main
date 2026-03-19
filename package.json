@@ -1,0 +1,333 @@
+{
+  "name": "hd-webapp-main",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@aws-sdk/client-elastic-beanstalk": "^3.995.0",
+    "@aws-sdk/client-secrets-manager": "^3.995.0",
+    "@babel/core": "^7.11.5",
+    "@opentelemetry/api": "^1.7.0",
+    "@opentelemetry/instrumentation": "^0.48.0",
+    "@opentelemetry/instrumentation-fetch": "^0.48.0",
+    "@opentelemetry/sdk-trace-web": "^1.21.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@cypress/webpack-preprocessor": "6.0.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@formatjs/intl-numberformat": "^8.10.0",
+    "@ipregistry/client": "^4.5.0",
+    "@lottiefiles/react-lottie-player": "^3.4.7",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "5.15.20",
+    "@mui/utils": "5.15.20",
+    "@mui/x-date-pickers": "6.16.1",
+    "@policyme/global-libjs-designsystem": "1.52.0",
+    "@policyme/global-libjs-utils": "0.130.0",
+    "@sentry/node": "^7.92.0",
+    "@sentry/tracing": "^6.2.5",
+    "@sentry/webpack-plugin": "^2.22.3",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.1",
+    "@types/cypress": "^1.1.6",
+    "acorn": "^8.0.1",
+    "argparse": "^2.0.1",
+    "autoclean": "^1.0.2",
+    "axe-core": "^4.10.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-formatjs": "10.2.19",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-universal-import": "^4.0.2",
+    "babel-preset-react-app": "^10.0.0",
+    "babel-runtime": "6.26.0",
+    "cache-loader": "^4.1.0",
+    "canvas-confetti": "^1.3.3",
+    "chalk": "^4.1.0",
+    "clean-webpack-plugin": "^1.0.1",
+    "connected-react-router": "^6.8.0",
+    "cookie-parser": "^1.4.5",
+    "copy-webpack-plugin": "^6.3.0",
+    "core-js": "^3.21.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^6.10.0",
+    "dotenv": "^8.2.0",
+    "dotenv-expand": "^5.1.0",
+    "dotenv-webpack": "^2.0.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-webpack-plugin": "^5.0.2",
+    "express": "^4.21.2",
+    "extract-css-chunks-webpack-plugin": "^4.7.5",
+    "file-loader": "^3.0.1",
+    "global": "^4.4.0",
+    "hard-source-webpack-plugin": "^0.13.1",
+    "history": "^4.10.1",
+    "intersection-observer": "^0.5.1",
+    "js-cookie": "^3.0.5",
+    "lodash": "^4.17.21",
+    "moment": "^2.27.0",
+    "nanoid": "^2.0.3",
+    "object-assign": "4.1.1",
+    "object.fromentries": "^2.0.2",
+    "promise": "^8.1.0",
+    "prop-types": "^15.6.2",
+    "query-string": "^5.1.1",
+    "raf": "^3.4.1",
+    "react": "^17.0.2",
+    "react-code-splitting": "^1.2.1",
+    "react-countup": "^4.2.3",
+    "react-dev-utils": "^11.0.4",
+    "react-device-detect": "^1.14.0",
+    "react-dom": "^17.0.2",
+    "react-facebook-pixel": "^0.1.3",
+    "react-helmet": "^6.1.0",
+    "react-hot-loader": "^4.12.21",
+    "react-intl": "^6.2.1",
+    "react-modal": "^3.11.2",
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-select": "^3.1.0",
+    "react-transition-group": "^4.4.1",
+    "react-universal-component": "^4.0.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.9",
+    "resolve": "^1.17.0",
+    "rimraf": "^3.0.2",
+    "sass": "^1.37.2",
+    "sass-loader": "^10.0.1",
+    "serve": "^11.3.2",
+    "sha.js": "^2.4.11",
+    "shortid": "^2.2.15",
+    "smoothscroll-polyfill": "^0.4.4",
+    "stickyfilljs": "^2.1.0",
+    "storybook-zeplin": "^1.7.2",
+    "style-loader": "^1.2.1",
+    "swiper": "^6.8.4",
+    "ua-parser-js": "^0.7.28",
+    "url-loader": "^4.1.0",
+    "uuid": "^9.0.0",
+    "webpack": "^4.46.0",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-flush-chunks": "^2.0.3",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-hot-server-middleware": "^0.6.1",
+    "webpack-stats-plugin": "^1.1.3",
+    "whatwg-fetch": "^3.4.0",
+    "write-file-webpack-plugin": "^4.5.1"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.504.0",
+    "@babel/preset-typescript": "^7.23.3",
+    "@cypress/webpack-dev-server": "3.11.0",
+    "@emotion/babel-preset-css-prop": "^11.11.0",
+    "@eslint/js": "^9.35.0",
+    "@formatjs/cli": "^5.1.3",
+    "@jest/globals": "^29.7.0",
+    "@percy/cli": "^1.18.0",
+    "@percy/cypress": "^3.1.3",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/react": "^7.6.17",
+    "@storybook/storybook-deployer": "^2.8.10",
+    "@storybook/testing-library": "0.0.9",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "@types/google.maps": "^3.58.1",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "axe-html-reporter": "^2.2.5",
+    "babel-jest": "^29.7.0",
+    "babel-plugin-dynamic-import-node": "^2.3.3",
+    "compression": "^1.7.4",
+    "core-js": "^3.21.1",
+    "cors": "^2.8.5",
+    "cypress": "13.17.0",
+    "cypress-axe": "^1.5.0",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-cypress": "^2.15.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^29.0.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-local-rules": "^3.0.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-storybook": "^0.6.4",
+    "eslint-plugin-testing-library": "^7.6.8",
+    "eslint-plugin-unused-imports": "^4.2.0",
+    "event-source-polyfill": "^1.0.21",
+    "fetch-mock": "^9.10.7",
+    "fs-extra": "^9.0.1",
+    "googleapis": "^131.0.0",
+    "http-proxy-middleware": "^3.0.5",
+    "husky": "^9.1.7",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-canvas-mock": "^2.4.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jwt-decode": "^4.0.0",
+    "lint-staged": "^16.1.6",
+    "msw": "^0.49.2",
+    "node-fetch": "^2.7.0",
+    "prettier": "^3.6.2",
+    "storybook-addon-i18n": "^5.1.13",
+    "storybook-react-intl": "^1.1.1",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "dev-debug": "cross-env NODE_ENV=development node debug/store/redux.js",
+    "dev-mock": "cross-env USE_MOCKS=true NODE_ENV=development node server/index.js",
+    "dev-init": "cross-env INIT_STORE=true NODE_ENV=development node server/index.js",
+    "dev": "cross-env NODE_ENV=development node server/index.js",
+    "eslint": "npx eslint --fix src/ && npx eslint 'src/**'",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix --max-warnings=0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "serve": "cross-env NODE_ENV=production node server/index.js serve",
+    "cypress-dev-server": "cross-env NODE_ENV=cypressserver node server/index.js",
+    "server": "cross-env NODE_ENV=$npm_config_nodeenv node server/index.js",
+    "dev-https": "cross-env NODE_ENV=development PM_HTTPS=true node server/index.js",
+    "start-https": "cross-env NODE_ENV=production PM_HTTPS=true node server/index.js",
+    "server-https": "cross-env NODE_ENV=$npm_config_nodeenv PM_HTTPS=true node server/index.js",
+    "start-local": "cross-env LOCAL_ENV=1 NODE_ENV=production node server/index.js",
+    "build": "cross-env NODE_ENV=production SKIP_SERVER=1 node server/index.js",
+    "test": "jest",
+    "test-circle-ci": "jest --runInBand",
+    "test-watch": "jest --watchAll",
+    "test-coverage": "cross-env node testServer/index.js",
+    "cypress-run-ally": "NODE_ENV=development cypress open --component --browser chrome --env CYPRESS_ENV=local,ABTESTBAND=$npm_config_ab,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false,watchForFileChanges=true",
+    "cypress-run-ally-headless": "cypress install && NODE_ENV=development cypress run --component --browser chrome --headless --spec 'cypress/component/A11yTests/**/index.js' --env CYPRESS_ENV=local,ABTESTBAND=$npm_config_ab,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false",
+    "cypress-open": "NODE_ENV=development cypress open --browser chrome --env CYPRESS_ENV=$npm_config_cypress_config,JIRA_TICKET=$npm_config_jira,ABTESTBAND=$npm_config_ab,TENANT_CODE=pm",
+    "cypress-run-partiale2e": "cypress install --force && SPEC=${npm_config_spec:-cypress/e2e/partialE2E/**/index.{js,ts}} && TENANT_CODE=${npm_config_tenant_code:-pm} && echo \"Running Cypress specs: $SPEC (tenant: $TENANT_CODE)\" && NODE_ENV=development cypress run --e2e --browser chrome --headless --spec \"$SPEC\" --env CYPRESS_ENV=$npm_config_cypress_config,TENANT_CODE=$TENANT_CODE,JIRA_TICKET=$npm_config_jira --config pageLoadTimeout=300000,video=false,retries=2",
+    "cypress-run-components-no-percy": "cypress install --force && NODE_ENV=development cypress run --component --spec 'cypress/component/ComponentTests/**/*' --env CYPRESS_ENV=local,TENANT_CODE=pm --config video=false",
+    "cypress-run-components": "cypress install --force && NODE_ENV=development percy exec -- cypress run --component --spec 'cypress/component/ComponentTests/**/*' --env CYPRESS_ENV=local,TENANT_CODE=pm --config video=false",
+    "cypress-open-components": "NODE_ENV=development cypress open --browser chrome --component --env CYPRESS_ENV=$npm_config_cypress_config,ABTESTBAND=$npm_config_ab,TENANT_CODE=${npm_config_tenant_code:-pm}",
+    "cypress-run-components-single": "NODE_ENV=development cypress run --component --env CYPRESS_ENV=local,TENANT_CODE=pm --config video=false --spec \"cypress/component/$npm_config_test\"",
+    "cypress-run": "NODE_ENV=development cypress run --e2e --browser chrome --headless --config pageLoadTimeout=300000,video=false",
+    "cypress-record": "NODE_ENV=development cypress run --e2e --env CYPRESS_ENV=$npm_config_cypress_config --headless --browser chrome --config pageLoadTimeout=200000 --record",
+    "cypress-run-internal-tool-tests-joint": "NODE_ENV=development cypress run --e2e --browser chrome --headless --spec 'cypress/e2e/NewJoint/index.{js,ts}' --env CYPRESS_ENV=$npm_config_cypress_config,TENANT_CODE=$npm_config_tenant_code --config pageLoadTimeout=300000,video=false",
+    "cypress-run-internal-tool-tests-all": "NODE_ENV=development cypress run --e2e --browser chrome --headless --spec 'cypress/e2e/InternalToolTesting/**/index.{js,ts}' --env CYPRESS_ENV=$npm_config_cypress_config,TENANT_CODE=$npm_config_tenant_code,ABTESTBAND=$npm_config_ab --config pageLoadTimeout=300000,video=false",
+    "cypress-run-internal-tool-tests-single": "NODE_ENV=development cypress run --e2e --browser chrome --headless --spec \"cypress/e2e/InternalToolTesting/TestCase$npm_config_test/index.{js,ts}\" --env CYPRESS_ENV=$npm_config_cypress_config,TENANT_CODE=$npm_config_tenant_code,ABTESTBAND=$npm_config_ab,JIRA_TICKET=$npm_config_jira --config pageLoadTimeout=300000,video=false",
+    "cypress-component-tests-bucket1": "NODE_ENV=development cypress run --component --browser chrome --headless --spec \"cypress/component/ComponentTests/[A-L]*.{js,tsx},cypress/component/ComponentTests/[a-l]*.{js,tsx}\" --env CYPRESS_ENV=local,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false",
+    "cypress-component-tests-bucket2": "NODE_ENV=development cypress run --component --browser chrome --headless --spec \"cypress/component/ComponentTests/[M-Z]*.{js,tsx},cypress/component/ComponentTests/[m-z]*.{js,tsx},cypress/component/ComponentTests/HDPlanTest/**/*\" --env CYPRESS_ENV=local,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false",
+    "cypress-a11y-tests-bucket1": "NODE_ENV=development cypress run --component --browser chrome --headless --spec \"cypress/component/A11yTests/[A-L]*/**/*.{js,tsx},cypress/component/A11yTests/[a-l]*/**/*.{js,tsx}\" --env CYPRESS_ENV=local,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false",
+    "cypress-a11y-tests-bucket2": "NODE_ENV=development cypress run --component --browser chrome --headless --spec \"cypress/component/A11yTests/[M-Z]*/**/*.{js,tsx},cypress/component/A11yTests/[m-z]*/**/*.{js,tsx}\" --env CYPRESS_ENV=local,TENANT_CODE=pm --config pageLoadTimeout=300000,video=false",
+    "storybook": "cross-env STORYBOOK_ENV=storybook start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-aws-s3 --bucket-path=policyme-global-libjs-layout-internal/life",
+    "extract": "formatjs extract --ignore='**/*.d.{js,ts}' --out-file lang/en-new.json --id-interpolation-pattern '[sha512:contenthash:base64:6]' \"src/**/*.{js,jsx,tsx}\" --format simple --flatten",
+    "extract-merge": "npm run extract && node ./mergeLangJson.js",
+    "compile-en": "formatjs compile \"lang/en_CA.json\" \"lang/legal_en_CA.json\" --ast --out-file compiled-lang/en_CA.json --format simple",
+    "compile-fr": "formatjs compile \"lang/fr_CA.json\" \"lang/legal_fr_CA.json\" --ast --out-file compiled-lang/fr_CA.json --format simple",
+    "generate-lang-tests": "node ./automaticLangTests.js",
+    "type-check": "tsc --noEmit --project tsconfig.check.json",
+    "type-check-watch": "tsc --noEmit --watch --project tsconfig.check.json",
+    "eslint-check": "eslint .",
+    "eslint-report": "npm run --silent eslint-check -- --format json > eslint-report.json",
+    "eslint-ignore-list": "npm run eslint-report && node node_modules/@policyme/global-libjs-utils/create_eslint_ignore_list.js",
+    "auto-ignore": "node node_modules/@policyme/global-libjs-utils/apply_eslint_ignores.js",
+    "eslint-ratchet": "node node_modules/@policyme/global-libjs-utils/eslint_ignore_ratchet.js"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "echo \"pre commit hook executing\""
+    ],
+    "*.{json,md,yml,yaml}": [
+      "echo \"pre commit hook executing\""
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "babel": {
+    "presets": [
+      "react-app",
+      [
+        "@babel/preset-typescript",
+        {
+          "isTSX": true,
+          "allExtensions": true
+        }
+      ],
+      "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": [
+      [
+        "formatjs",
+        {
+          "idInterpolationPattern": "[sha512:contenthash:base64:6]",
+          "ast": true
+        }
+      ]
+    ],
+    "env": {
+      "production": {
+        "plugins": [
+          [
+            "formatjs",
+            {
+              "idInterpolationPattern": "[sha512:contenthash:base64:6]",
+              "ast": true
+            }
+          ]
+        ]
+      },
+      "development": {
+        "plugins": [
+          "react-hot-loader/babel",
+          [
+            "formatjs",
+            {
+              "idInterpolationPattern": "[sha512:contenthash:base64:6]",
+              "ast": true
+            }
+          ]
+        ]
+      },
+      "test": {
+        "plugins": [
+          "dynamic-import-node",
+          [
+            "formatjs",
+            {
+              "idInterpolationPattern": "[sha512:contenthash:base64:6]",
+              "ast": true
+            }
+          ]
+        ]
+      },
+      "cypressserver": {
+        "plugins": [
+          "react-hot-loader/babel",
+          [
+            "formatjs",
+            {
+              "idInterpolationPattern": "[sha512:contenthash:base64:6]",
+              "ast": true
+            }
+          ]
+        ]
+      }
+    }
+  }
+}

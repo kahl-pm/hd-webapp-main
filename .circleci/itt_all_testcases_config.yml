@@ -1,0 +1,79 @@
+version: 2.1
+orbs:
+  itt: policyme/itt_v8@dev:master
+parameters:
+  run-itt:
+    default: false
+    type: boolean
+  run-itt-all-test-cases:
+    default: false
+    type: boolean
+  run-itt-selected-test-cases:
+    default: false
+    type: boolean
+  run-policyme:
+    default: true
+    type: boolean
+  run-itt-for-tenant:
+    default: ""
+    type: string
+  run-itt-ondemand:
+    default: true
+    type: boolean
+  is_nightly_run:
+    default: false
+    type: boolean
+  slack-initiator:
+    default: ""
+    type: string
+
+workflows:
+  itt:
+    jobs:
+      - itt/cypress:
+          name: 37-test-case
+          test_case_number: 37
+          run_itt_for_tenant: << pipeline.parameters.run-itt-for-tenant >>
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+      - itt/validation-testcases:
+          name: 37-validation-test-case
+          test_case_number: 37
+          run_itt_for_tenant: << pipeline.parameters.run-itt-for-tenant >>
+          requires:
+            - 37-test-case
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_PYPI_CONTEXT
+      - itt/cypress:
+          name: 51-test-case
+          test_case_number: 51
+          run_itt_for_tenant: << pipeline.parameters.run-itt-for-tenant >>
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_GOOGLE_CONTEXT
+            - PM_NPM_READ_CONTEXT
+      - itt/waiter:
+          name: wait-for-test-cases
+          waiter_job_name: "wait-for-test-cases"
+          context:
+            - PM_CIRCLECI_CONTEXT
+      - itt/send-slack-message:
+          use_ondemand: << pipeline.parameters.run-itt-ondemand >>
+          is_nightly_run: << pipeline.parameters.is_nightly_run >>
+          slack_initiator: << pipeline.parameters.slack-initiator >>
+          requires:
+            - wait-for-test-cases
+          context:
+            - PM_AWS_CONTEXT
+            - PM_GITHUB_CONTEXT
+            - PM_SLACK_CONTEXT
+            - PM_GOOGLE_CONTEXT

@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false, // Override to false for type-checking
+    "noEmit": true, // Explicitly set noEmit here for clarity, though it's specified via CLI as well
+    "skipLibCheck": true
+  },
+}

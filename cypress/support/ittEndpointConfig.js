@@ -1,0 +1,77 @@
+// ITT Endpoint Configuration: Maps endpoint aliases to their expected success codes and retry behavior
+// This configuration is used by waitForEndpointSuccess to automatically process ITT test endpoints
+export const ITT_ENDPOINT_CONFIG = {
+  // Standard 200 success codes
+  '@accounts': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@quotes': { successCodes: [200], maxFailures: 3, timeout: 60000, responseTimeout: 60000 },
+  '@startDisclosure': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@nextQuestion': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@submitAnswer': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@patchHouseholdInfos': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@putHouseholdInfos': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@householdInfos': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@utm': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@verifyEmail': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@affiliate': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@occupation0': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@coverage': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@expenses': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@lifeSessions': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@ciSessions': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@consent': { successCodes: [200, 201, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@lifeApps': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@patchLifeApps': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@patchLifeAppsLongUrl': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@sendLifeApp': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@ciApps': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@sendCiApp': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@crm': { successCodes: [200, 201, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@lifePolicies': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@ciPolicies': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@patchLifePolicies': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@patchCiPolicies': { successCodes: [200, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@generateDocusign': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@submitDocusign': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@docusignCallback': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@helcim': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@stripeLoad': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@stripe': { successCodes: [200, 402], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@followUpTimes': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@policy': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@sendAuth0Email': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@validateEmailLink': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@sendOtp': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@verifyOtp': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@ipRegistry': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@hd-quotes': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@postEnrolHbmPlanMember': { successCodes: [200, 201], maxFailures: 3, timeout: 120000, responseTimeout: 120000 },
+  '@digitalConsentStatus': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@uploadDigitalConsent': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@validateDocumentGeneration': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@postBeneficiaries': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@generateRenewalsLife': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@generateRenewalsCi': { successCodes: [200, 201], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@segmentTrack': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@segmentPage': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@segmentIdentify': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  '@geoLocationQuebec': { successCodes: [200], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+  
+  // Payment-related endpoints (longer timeouts)
+  '@createCustomer': { successCodes: [200, 201], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  '@setupIntent': { successCodes: [200, 201], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  '@payment': { successCodes: [200, 201], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  '@createLifeCISubscription': { successCodes: [200, 201], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  '@createHDSubscription': { successCodes: [200, 201], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  '@rehydrateJourney': { successCodes: [200], maxFailures: 3, timeout: 180000, responseTimeout: 180000 },
+  
+  // Authorization endpoints (more retries, longer timeouts)
+  '@auraAuthorization': { successCodes: [200, 201], maxFailures: 6, timeout: 90000, responseTimeout: 90000 },
+  '@auraDecision': { successCodes: [200, 201], maxFailures: 6, timeout: 180000, responseTimeout: 180000 },
+  
+  // ID Verification (longer timeout)
+  '@idVerification': { successCodes: [200, 201], maxFailures: 3, timeout: 120000, responseTimeout: 120000 },
+  
+  // Default configuration for endpoints not explicitly defined
+  '@default': { successCodes: [200, 201, 204], maxFailures: 3, timeout: 30000, responseTimeout: 30000 },
+};
+
