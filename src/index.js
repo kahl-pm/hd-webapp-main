@@ -8,8 +8,19 @@ import '@formatjs/intl-numberformat/locale-data/en-CA';
 import '@formatjs/intl-numberformat/locale-data/fr-CA';
 import 'smoothscroll-polyfill';
 
+import { server } from '@policyme/global-libjs-utils';
+import { mapTenantToPublicKeys } from './tenant/publicKeys';
 import store, { history } from './store';
 import App from './App';
+
+// Initialize tenant context client-side (was previously done by SSR)
+const hostname = window.location.hostname;
+const tenantInfo = server.getTenantInfo(hostname);
+if (tenantInfo) {
+  server.applyTenantInjection(window, hostname, tenantInfo, mapTenantToPublicKeys);
+} else {
+  console.error(`Unable to find tenant for hostname: ${hostname}`);
+}
 
 ReactDOM.render(
   <Provider store={store}>
