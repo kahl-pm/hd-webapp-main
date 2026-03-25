@@ -362,6 +362,7 @@ const App = (props) => {
         mergeThemes={[muiTheme]}
         useRebrandTheme={props.isRebrandDesignEnabled}
       >
+        <Suspense fallback={<LoadingComponent />}>
         <ErrorBoundaryHOC>
           <CustomisationProvider
             abTestConfig={ACTIVE_TESTS}
@@ -385,6 +386,7 @@ const App = (props) => {
             <GlobalCSS />
           </CustomisationProvider>
         </ErrorBoundaryHOC>
+        </Suspense>
       </NewUIThemeProvider>
     </div>
   );

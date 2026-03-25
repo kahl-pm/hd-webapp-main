@@ -1337,9 +1337,9 @@ export function handleAffiliateParams(params) {
 export function loadLocaleData(locale): Promise<any> {
   switch (locale) {
     case LOCALE.FR_CA:
-      return import('../../compiled-lang/fr_CA.json');
+      return import('../../compiled-lang/fr_CA.json').then(m => m.default || m);
     default:
-      return import('../../compiled-lang/en_CA.json');
+      return import('../../compiled-lang/en_CA.json').then(m => m.default || m);
   }
 }
 

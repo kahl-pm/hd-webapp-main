@@ -27,7 +27,8 @@ class ErrorBoundaryHOC extends React.Component<{ children: React.ReactNode }, St
 
   componentDidCatch(error, errorInfo) {
     // log additional errors
-    // console.log(error, errorInfo);
+    console.error('[ErrorBoundaryHOC] Caught error:', error);
+    console.error('[ErrorBoundaryHOC] Component stack:', errorInfo?.componentStack);
   }
 
   componentDidMount(): void {

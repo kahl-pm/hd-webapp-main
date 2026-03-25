@@ -8,6 +8,14 @@ import { createRequire } from 'module';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
+
+// Load .env into process.env BEFORE buildEnvDefines() reads it.
+// Vite does not populate process.env from .env files at config-load time,
+// so without this, buildEnvDefines() would only see shell env vars and
+// none of the PM_*, LOCAL_TENANT_*, etc. values from .env.
+const dotenv = require('dotenv');
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
 const { buildEnvDefines } = require('./config/envHelper.js');
 const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf-8'));
 
@@ -59,6 +67,20 @@ export default defineConfig(({ mode }) => ({
     'process.env.NODE_ENV': JSON.stringify(mode),
     'process.env.RELEASE_VERSION': JSON.stringify(pkg.version),
     'process.env.GLOBAL_ROUTE': JSON.stringify('/hd'),
+    // LOCAL_TENANT* vars are needed by getTenantInfo() in @policyme/global-libjs-utils
+    // but don't match the PM_*/SENTRY_*/CLIENT_* prefixes in buildEnvDefines()
+    ...(process.env.LOCAL_TENANT_ID && {
+      'process.env.LOCAL_TENANT_ID': JSON.stringify(process.env.LOCAL_TENANT_ID),
+    }),
+    ...(process.env.LOCAL_TENANT && {
+      'process.env.LOCAL_TENANT': JSON.stringify(process.env.LOCAL_TENANT),
+    }),
+    ...(process.env.LOCAL_TENANT_SUBORGANIZATION_ID && {
+      'process.env.LOCAL_TENANT_SUBORGANIZATION_ID': JSON.stringify(process.env.LOCAL_TENANT_SUBORGANIZATION_ID),
+    }),
+    ...(process.env.LOCAL_TENANT_SUBORGANIZATION && {
+      'process.env.LOCAL_TENANT_SUBORGANIZATION': JSON.stringify(process.env.LOCAL_TENANT_SUBORGANIZATION),
+    }),
     ...buildEnvDefines(),
   },
 
