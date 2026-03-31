@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, Suspense } from 'react';
 import { connect } from 'react-redux';
-import universal from 'react-universal-component';
 import { ThemeProvider as NewUIThemeProvider } from '@policyme/global-libjs-designsystem/';
 import { ThemeKey } from '@policyme/global-libjs-designsystem/ThemeProvider.types';
 import { getTheme } from '@policyme/global-libjs-utils';
@@ -11,16 +10,14 @@ import {
 } from '../../Selectors/blocker';
 import PageContentWithNav from '../PageContentWithNav';
 import GlobalCSS from '../../GlobalCSS';
-import { getLoadingConfig } from '../Routing/utils';
+import LoadingComponent from '../LoadingOverlay';
 
-const PolicyIsSetUp = universal(
-  () => import(/* webpackChunkName: "other" */ '../../pages/lockedPages/PolicyIsSetUp'),
-  getLoadingConfig('other'),
+const PolicyIsSetUp = React.lazy(
+  () => import('../../pages/lockedPages/PolicyIsSetUp'),
 );
 
-const DecisionIsMade = universal(
-  () => import(/* webpackChunkName: "other" */ '../../pages/lockedPages/DecisionIsMade'),
-  getLoadingConfig('other'),
+const DecisionIsMade = React.lazy(
+  () => import('../../pages/lockedPages/DecisionIsMade'),
 );
 
 const BlockerStyleComponent = (props) => {
@@ -52,13 +49,17 @@ const WithBlockerHandler = (WrappedComponent) => (props) => {
 
   if (!isCurrentlyHydratingData && showPolicyIsSetupBlocker) {
     return <BlockerStyleComponent>
-      <PolicyIsSetUp {...passThroughProps} />
+      <Suspense fallback={<LoadingComponent />}>
+        <PolicyIsSetUp {...passThroughProps} />
+      </Suspense>
     </BlockerStyleComponent>;
   }
 
   if (!isCurrentlyHydratingData && showDecisionIsMadeBlocker) {
     return <BlockerStyleComponent>
-      <DecisionIsMade {...passThroughProps} />
+      <Suspense fallback={<LoadingComponent />}>
+        <DecisionIsMade {...passThroughProps} />
+      </Suspense>
     </BlockerStyleComponent>;
   }
 

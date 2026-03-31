@@ -1,30 +1,26 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
-import universal from 'react-universal-component';
 import { useCustomPages } from '../Customisation';
 
 import Container from '../Container';
 import { ROUTES, ROUTE_SECTIONS } from '../../utils/const';
-import { getLoadingConfig, checkIfMigratedPage } from './utils';
+import { checkIfMigratedPage } from './utils';
+import LoadingComponent from '../LoadingOverlay';
 
-const EffectiveDate = universal(
-  () => import(/* webpackChunkName: "approved" */ '../../pages/approved/EffectiveDate'),
-  getLoadingConfig('approved'),
+const EffectiveDate = React.lazy(
+  () => import('../../pages/approved/EffectiveDate'),
 );
 
-const PaymentInProgress = universal(
-  () => import(/* webpackChunkName: "other" */ '../../pages/approved/PaymentInProgress'),
-  getLoadingConfig('other'),
+const PaymentInProgress = React.lazy(
+  () => import('../../pages/approved/PaymentInProgress'),
 );
 
-const PaymentReceived = universal(
-  () => import(/* webpackChunkName: "other" */ '../../pages/approved/PaymentReceived'),
-  getLoadingConfig('other'),
+const PaymentReceived = React.lazy(
+  () => import('../../pages/approved/PaymentReceived'),
 );
 
-const StripePaymentForm = universal(
-  () => import(/* webpackChunkName: "approved" */ '../../pages/approved/StripePaymentForm'),
-  getLoadingConfig('approved'),
+const StripePaymentForm = React.lazy(
+  () => import('../../pages/approved/StripePaymentForm'),
 );
 
 const ApprovedComponent = () => {
@@ -37,6 +33,7 @@ const ApprovedComponent = () => {
     <Container
       isNewDesignSystemMigratedPage={isNewDesignSystemMigratedPage}
     >
+      <Suspense fallback={<LoadingComponent />}>
       <Switch>
         { /* Customisation framework pages */
           customPages.map(([path, component]) => (
@@ -52,6 +49,7 @@ const ApprovedComponent = () => {
         <Route exact path={ROUTES.PAYMENT_IN_PROGRESS} component={PaymentInProgress} />
         <Route exact path={ROUTES.PAYMENT_RECEIVED} component={PaymentReceived} />
       </Switch>
+      </Suspense>
     </Container>
   </>);
 };

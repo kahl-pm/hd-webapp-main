@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { ROUTES } from '../../utils/const';
-import { GLOBAL_ROUTE } from '../../../config/const';
+import { GLOBAL_ROUTE } from '../../config';
 
 const DebugPage = (props) => {
   const linkComponents = [];

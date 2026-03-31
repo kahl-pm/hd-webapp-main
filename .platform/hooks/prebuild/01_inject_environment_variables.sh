@@ -102,7 +102,7 @@ function inject_environment_variables_in_application {
     local placeholder="__RUNTIME_PM_ENVIRONMENTS__"
     local filename="environment.js"
     local source_file_path="${base_path}/server/${filename}"
-    local target_file_path="${base_path}/build/life/${filename}"
+    local target_file_path="${base_path}/build/hd/${filename}"
 
     if [[ ! -e "${target_file_path}" ]]; then
         log_info "File not found: ${target_file_path}, Creating ..."

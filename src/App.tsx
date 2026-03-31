@@ -14,11 +14,9 @@ import { ThemeProvider as NewUIThemeProvider, WithThemeProvider } from '@policym
 import { ThemeKey } from '@policyme/global-libjs-designsystem/ThemeProvider.types';
 import { getUrls, getTheme, initSentry, segmentSetAnonymousId, hasFlag, TENANT_FLAGS } from '@policyme/global-libjs-utils';
 import { goBack, push } from 'connected-react-router';
-import React, { useEffect } from 'react';
-import { hot } from 'react-hot-loader/root';
+import React, { useEffect, Suspense } from 'react';
 import { connect, useSelector } from 'react-redux';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
-import universal from 'react-universal-component';
 import { CustomisationProvider, useCustomPages, useAllEntryPointOverrides, useActiveEntryPointOverrides } from './components/Customisation';
 import CanonicalLink from './components/CanonicalLink';
 import PageTitle from './components/PageTitle';
@@ -39,7 +37,6 @@ import { isMortgageBroker, isPolicymePartner as isPolicymePartnerSelector } from
 import ExternalRedirect from './components/ExternalRedirect';
 import WithHydration from './components/HOC/WithHydration';
 import LoadingComponent from './components/LoadingOverlay';
-import RUCError from './components/RUCError';
 import {
   PM_ENVIRONMENT, RELEASE_VERSION, APP_ENV,
   PM_ONDEMAND_ENV, SENTRY_DSK,
@@ -68,127 +65,32 @@ import GlobalCSS from './GlobalCSS';
 import ScrollToTopWithRouter from './components/ScrollToTop';
 import AirmilesNumber from './pages/health-and-dental/AirmilesNumber';
 import HouseholdIncomePage from './pages/HouseholdIncome';
-import { getLoadingConfig } from './components/Routing/utils';
 
-// infrequently used pages
-const NotFound = universal(
-  () => import(/* webpackChunkName: "other" */ './pages/not-found'),
-  getLoadingConfig('other'),
-);
-
-const Intent = universal(
-  () => import(/* webpackChunkName: "split-application" */ './pages/Intent'),
-  getLoadingConfig('split-application'),
-);
-
-const StartApp = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/StartApp'),
-  getLoadingConfig('other'),
-);
-
-const AuraStartError = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/AuraStartError'),
-  getLoadingConfig('other'),
-);
-
-const JiraLogin = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/JiraLogin'),
-  getLoadingConfig('other'),
-);
-
-const DecisionDashboardPage = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/DecisionDashboardPage'),
-  getLoadingConfig('other'),
-);
-
-const DecisionDashboardCallback = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/DecisionDashboardCallback'),
-  getLoadingConfig('other'),
-);
-
-const Callback = universal(
-  () => import(/* webpackChunkName: "docusign" */ './pages/docusign/Callback'),
-  getLoadingConfig('docusign'),
-);
-
-const SkipMagicLinkCallback = universal(
-  () => import(/* webpackChunkName: "docusign" */ './pages/SkipMagicLinkCallback'),
-  getLoadingConfig('other'),
-);
-
-const MagicLinkAuthCallback = universal(
-  () => import(/* webpackChunkName: "docusign" */ './pages/MagicLinkAuthCallback'),
-  getLoadingConfig('other'),
-);
-
-const AffiliateLogoRow = universal(
-  () => import(/* webpackChunkName: "other" */ './components/AffiliateLogoRow'),
-  getLoadingConfig('other'),
-);
-
-const RebrandDebugMenu = universal(
-  () => import(/* webpackChunkName: "other" */ './components/RebrandNav/DebugMenu'),
-  getLoadingConfig('other'),
-);
-
-const Verification = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/Verification'),
-  getLoadingConfig('application'),
-);
-
-const VerificationError = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/VerificationError'),
-  getLoadingConfig('other'),
-);
-
-const GroupBenefits = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/GroupBenefits'),
-  getLoadingConfig('application'),
-);
-
-const CoverageFitQuestion = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/CoverageFitQuestion'),
-  getLoadingConfig('application'),
-);
-
-const ExistingCoverageHd = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/ExistingCoverage'),
-  getLoadingConfig('application'),
-);
-
-const CoverPrescriptions = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/CoverPrescriptions'),
-);
-
-const PrescriptionDrugs = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/PrescriptionDrugs'),
-  getLoadingConfig('application'),
-);
-
-const TwoFactorOtp = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/application/TwoFactorOtp'),
-  getLoadingConfig('application'),
-);
-
-const TwoFactorMaxAttempts = universal(
-  () => import(/* webpackChunkName: "createAccountPage" */ './pages/application/TwoFactorMaxAttempts'),
-  getLoadingConfig('application'),
-);
-
-const DigitalConsentDashboardPage = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/DigitalConsentDashboardPage'),
-  getLoadingConfig('other'),
-);
-
-const OTPVerification = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/application/OTPVerification'),
-  getLoadingConfig('application'),
-);
-
-const FamilyCompositionPage = universal(
-  () => import(/* webpackChunkName: "application" */ './pages/FamilyCompositionPage'),
-  getLoadingConfig('application'),
-);
+// Lazy-loaded pages (code splitting via React.lazy)
+const NotFound = React.lazy(() => import('./pages/not-found'));
+const Intent = React.lazy(() => import('./pages/Intent'));
+const StartApp = React.lazy(() => import('./pages/StartApp'));
+const AuraStartError = React.lazy(() => import('./pages/AuraStartError'));
+const JiraLogin = React.lazy(() => import('./pages/JiraLogin'));
+const DecisionDashboardPage = React.lazy(() => import('./pages/DecisionDashboardPage'));
+const DecisionDashboardCallback = React.lazy(() => import('./pages/DecisionDashboardCallback'));
+const Callback = React.lazy(() => import('./pages/docusign/Callback'));
+const SkipMagicLinkCallback = React.lazy(() => import('./pages/SkipMagicLinkCallback'));
+const MagicLinkAuthCallback = React.lazy(() => import('./pages/MagicLinkAuthCallback'));
+const AffiliateLogoRow = React.lazy(() => import('./components/AffiliateLogoRow'));
+const RebrandDebugMenu = React.lazy(() => import('./components/RebrandNav/DebugMenu'));
+const Verification = React.lazy(() => import('./pages/Verification'));
+const VerificationError = React.lazy(() => import('./pages/VerificationError'));
+const GroupBenefits = React.lazy(() => import('./pages/GroupBenefits'));
+const CoverageFitQuestion = React.lazy(() => import('./pages/CoverageFitQuestion'));
+const ExistingCoverageHd = React.lazy(() => import('./pages/ExistingCoverage'));
+const CoverPrescriptions = React.lazy(() => import('./pages/CoverPrescriptions'));
+const PrescriptionDrugs = React.lazy(() => import('./pages/PrescriptionDrugs'));
+const TwoFactorOtp = React.lazy(() => import('./pages/application/TwoFactorOtp'));
+const TwoFactorMaxAttempts = React.lazy(() => import('./pages/application/TwoFactorMaxAttempts'));
+const DigitalConsentDashboardPage = React.lazy(() => import('./pages/DigitalConsentDashboardPage'));
+const OTPVerification = React.lazy(() => import('./pages/application/OTPVerification'));
+const FamilyCompositionPage = React.lazy(() => import('./pages/FamilyCompositionPage'));
 
 /**
  * Initializes analytics components based on user consent and tenant.
@@ -242,6 +144,7 @@ const Routes = () => {
   const entryPointOverrides = useActiveEntryPointOverrides(allEntryPointOverrides);
 
   return (
+    <Suspense fallback={<LoadingComponent />}>
     <Switch>
       {/* Redirect root to HD entry point */}
       <Redirect
@@ -372,6 +275,7 @@ const Routes = () => {
 
       <Route path="*" component={NotFound} />
     </Switch>
+    </Suspense>
   );
 };
 
@@ -458,6 +362,7 @@ const App = (props) => {
         mergeThemes={[muiTheme]}
         useRebrandTheme={props.isRebrandDesignEnabled}
       >
+        <Suspense fallback={<LoadingComponent />}>
         <ErrorBoundaryHOC>
           <CustomisationProvider
             abTestConfig={ACTIVE_TESTS}
@@ -481,6 +386,7 @@ const App = (props) => {
             <GlobalCSS />
           </CustomisationProvider>
         </ErrorBoundaryHOC>
+        </Suspense>
       </NewUIThemeProvider>
     </div>
   );
@@ -520,7 +426,7 @@ connect(mapStateToProps, mapDispatchToProps)(
       WithBlockerHandler(
         WithConsentManager(
           WithHydration(
-            hot(App),
+            App,
           ),
         ),
       ),
